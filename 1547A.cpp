@@ -15,13 +15,20 @@ int main()
 		{
 			cout<<minsteps<<endl;
 		}
-		if((Sx==Tx==SKx) || Sy==Ty==Sky)
-		{
-			cout<<minsteps+2<<endl;
-		}
-		if(((Sx==Tx)&&(SKx<Sx || SKx>Sx))||((Sy==Ty)&&(Sky<Sy || Sky>Sy)))
+		
+		else if(((Sx==Tx)&&(SKx<Sx || SKx>Sx))||((Sy==Ty)&&(Sky<Sy || Sky>Sy)))
 		{
 			cout<<minsteps<<endl;
+		}
+		else if(((Sx==Tx)&&(Sx==SKx) )|| ((Sy==Ty)&&(Sy==Sky)))
+		{
+			if(SKx==Sky)
+				cout<<minsteps<<endl;
+			else
+				cout<<minsteps+2<<endl;
+		}
+		else{
+			cout<<"DOREMON"<<endl;
 		}
 	}
 	return 0;
