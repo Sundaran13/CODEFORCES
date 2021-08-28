@@ -15,6 +15,7 @@ int main()
 			cin>>x;
 			if(x%2!=i%2)
 			{
+				//Count of wrong places should be same
 				if(i%2==0)
 					odd++;
 				else
