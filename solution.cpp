@@ -14,6 +14,7 @@ using namespace __gnu_pbds;
 #define INF 1e18
 #define nline "\n"
 #define pb push_back
+#define for0(i, n) for (int i = 0; i < n; i++)
 #define ppb pop_back
 #define mp make_pair
 #define ff first
@@ -66,93 +67,56 @@ ll mod_mul(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a * b) % m) + m) %
 ll mod_sub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) % m;}
 ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprime(b, m), m) + m) % m;}  //only for prime m
 ll phin(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
-/*--------------------------------------------------------------------------------------------------------------------------*/
-bool areBracketsBalanced(string expr)
+bool areBracketsBalanced(string expr){stack<char> s;char x;for (int i = 0; i < expr.length(); i++){if (expr[i] == '(' ){s.push(expr[i]);continue;}if (s.empty())return false;switch (expr[i]){case ')': x = s.top();s.pop();if (x == '{' || x == '[')return false;break;}}return (s.empty());}
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+string isPalindrome(string S)
 {
-    stack<char> s;
-    char x;
+    // Stores the reverse of the
+    // string S
+    string P = S;
  
-    // Traversing the Expression
-    for (int i = 0; i < expr.length(); i++)
-    {
-        if (expr[i] == '(' )
-        {
-            // Push the element in the stack
-            s.push(expr[i]);
-            continue;
-        }
+    // Reverse the string P
+    reverse(P.begin(), P.end());
  
-        // IF current current character is not opening
-        // bracket, then it must be closing. So stack
-        // cannot be empty at this point.
-        if (s.empty())
-            return false;
- 
-        switch (expr[i])
-        {
-        case ')':
- 
-            // Store the top element in a
-            x = s.top();
-            s.pop();
-            if (x == '{' || x == '[')
-                return false;
-            break;
-        }
+    // If S is equal to P
+    if (S == P) {
+        // Return "Yes"
+        return "Yes";
     }
- 
-    return (s.empty());
+    // Otherwise
+    else {
+        // return "No"
+        return "No";
+    }
 }
+
+
 void solve() {
 	int t;
 	cin >> t;
 	while (t--) {
-		string s1,s2;
-		cin>>s1;
-		int n=s1.length();
-		if(s1[0]==s1[n-1])
-		{
-			cout<<"NO"<<endl;
-			continue;
+	int n,k;
+	cin>>n>>k;
+	string s;
+	cin>>s;
+	int deci=1;
+	for(int i=0;i<k;i++)
+	{
+		if(s[i]!=s[n-i-1]){
+			deci=0;
+			break;
 		}
-		s2=s1;
-		char x;
-		char f=s1[0];
-		char ls=s1[n-1];
-		if(s1[0]=='A' && s1[n-1]=='B' || s1[0]=='B' && s1[n-1]=='A')
-			x='C';
-		else if(s1[0]=='A' && s1[n-1]=='C'|| s1[0]=='C' && s1[n-1]=='A')
-			x='B';
-		else
-			x='A';
-		for(int i=0;i<n;i++)
-		{
-			if(s1[i]==f)
-			{
-				s1[i]='(';
-				s2[i]='(';
-			}
-			else if(s1[i]==ls)
-			{
-				s1[i]=')';
-				s2[i]=')';
-			}
-			else
-			{
-				s1[i]=')';
-				s2[i]='(';
-			}
-		}
-		if(areBracketsBalanced(s1)){
-			cout<<"YES"<<nline;
-			continue;
-		}
-		if(areBracketsBalanced(s2)){
-			cout<<"YES"<<nline;
-			continue;
-		}
-		cout<<"NO"<<nline;
+		else deci=1;
 	}
+	if(deci==1 && 2*k<n)
+		cout<<"YES"<<nline;
+	else
+		cout<<"NO"<<nline;
+
+	}
+
+
 }
 
 int main() {
